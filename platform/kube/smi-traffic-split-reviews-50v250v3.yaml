@@ -1,0 +1,14 @@
+apiVersion: split.smi-spec.io/v1alpha1
+# See: https://github.com/deislabs/smi-spec/blob/master/traffic-split.md
+kind: TrafficSplit
+metadata:
+  name: reviews-rollout
+spec:
+  # The root service that clients use to connect to the destination application.
+  service: reviews
+  # Services inside the namespace with their own selectors, endpoints and configuration.
+  backends:
+  - service: reviews-v2
+    weight: 50
+  - service: reviews-v3
+    weight: 50
